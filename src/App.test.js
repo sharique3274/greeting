@@ -29,6 +29,11 @@ test('render greet button', () => {
 
 test('app initial state', () => {
   const wrapper = setup();
-  const appInitialState = wrapper.state('disabled');
-  expect(appInitialState).toBe(false);
+  const appInitialState = wrapper.state();
+  expect(appInitialState).toEqual({
+    disabled: false,
+    errors: {},
+    firstName: '',
+    lastName: '',
+  });
 });

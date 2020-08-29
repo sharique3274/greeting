@@ -30,3 +30,15 @@ test('header props test', () => {
   const headerContent = findByTestAttr(wrapper, 'header-comp');
   expect(headerContent.text()).toBe('Welcome Sharique Rahman');
 });
+
+test('header props test lastname not present', () => {
+  const prop = {
+    firstName: 'Sharique',
+    lastName: '',
+    disabled: false,
+    errors: {},
+  };
+  const wrapper = setup(prop);
+  const headerContent = findByTestAttr(wrapper, 'header-comp');
+  expect(headerContent.text()).toBe('Welcome Sharique ');
+});

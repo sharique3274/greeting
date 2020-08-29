@@ -35,8 +35,9 @@ class App extends Component {
   };
 
   onGreetSubmit = (e) => {
+    console.log(e);
     const { disabled } = this.state;
-    e.preventDefault();
+
     const errors = this.validateInput();
 
     this.setState({ errors });
@@ -70,42 +71,45 @@ class App extends Component {
           lastName={lastName}
           firstName={firstName}
         />
-        <form onSubmit={this.onGreetSubmit}>
-          <div className='input-div'>
-            <InputBox
-              ref={(input) => {
-                this.firstName = input;
-              }}
-              type={this.appConfig.FIRST_NAME_FIELD['TYPE']}
-              placeholder={this.appConfig.FIRST_NAME_FIELD['PLACEHOLDER']}
-              onChange={this.onChange}
-              isLabel={false}
-              error={errors.firstName}
-              name={this.appConfig.FIRST_NAME_FIELD['NAME']}
-              autoFocus={true}
-            />
-            <CheckBox
-              name={this.appConfig.GREET_CHECKBOX_FIELD['NAME']}
-              checked={disabled}
-              onChange={this.onCheckboxChanged}
-            />
-            <InputBox
-              ref={(input) => {
-                this.lastName = input;
-              }}
-              type={this.appConfig.LAST_NAME_FIELD['TYPE']}
-              disabled={disabled}
-              isLabel={false}
-              error={!disabled ? errors.lastName : ''}
-              onChange={this.onChange}
-              placeholder={this.appConfig.LAST_NAME_FIELD['PLACEHOLDER']}
-              name={this.appConfig.LAST_NAME_FIELD['NAME']}
-            />
-          </div>
-          <button data-test='greet-btn' className='btn' type='submit'>
-            {this.appConfig.GREET_BUTTON_NAME}
-          </button>
-        </form>
+
+        <div className='input-div'>
+          <InputBox
+            ref={(input) => {
+              this.firstName = input;
+            }}
+            type={this.appConfig.FIRST_NAME_FIELD['TYPE']}
+            placeholder={this.appConfig.FIRST_NAME_FIELD['PLACEHOLDER']}
+            onChange={this.onChange}
+            isLabel={false}
+            error={errors.firstName}
+            name={this.appConfig.FIRST_NAME_FIELD['NAME']}
+            autoFocus={true}
+          />
+          <CheckBox
+            name={this.appConfig.GREET_CHECKBOX_FIELD['NAME']}
+            checked={disabled}
+            onChange={this.onCheckboxChanged}
+          />
+          <InputBox
+            ref={(input) => {
+              this.lastName = input;
+            }}
+            type={this.appConfig.LAST_NAME_FIELD['TYPE']}
+            disabled={disabled}
+            isLabel={false}
+            error={!disabled ? errors.lastName : ''}
+            onChange={this.onChange}
+            placeholder={this.appConfig.LAST_NAME_FIELD['PLACEHOLDER']}
+            name={this.appConfig.LAST_NAME_FIELD['NAME']}
+          />
+        </div>
+        <button
+          data-test='greet-btn'
+          className='btn'
+          onClick={this.onGreetSubmit}
+        >
+          {this.appConfig.GREET_BUTTON_NAME}
+        </button>
       </div>
     );
   }
