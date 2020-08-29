@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './component/header/header';
 import CheckBox from './component/check-box/check-box';
+import InputBox from './component/input-box/input-box';
 
 class App extends Component {
   state = {
@@ -43,33 +44,32 @@ class App extends Component {
       <div>
         <Header lastName={lastName} firstName={firstName} />
         <div className='input-div'>
-          <input
+          <InputBox
             ref={(input) => {
               this.firstName = input;
             }}
             type='text'
-            className={showError ? 'inpt-box err' : 'inpt-box'}
+            customClass={showError ? 'inpt-box err' : 'inpt-box'}
             placeholder='F NAME'
             onChange={this.onFNameChange}
+            showError={showError}
           />
-          {showError ? (
-            <p className='err-style'>Please enter first name</p>
-          ) : (
-            ''
-          )}
+
           <CheckBox
             name='No LNAME'
             checked={disabled}
             onChange={this.onCheckboxChanged}
           />
-          <input
+          <InputBox
             ref={(input) => {
               this.lastName = input;
             }}
             type='text'
             disabled={disabled}
-            className='inpt-box'
+            customClass='inpt-box'
+            isLabel={false}
             placeholder='L NAME'
+            name='lastName'
           />
         </div>
 

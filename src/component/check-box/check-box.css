@@ -12,6 +12,7 @@ input[type='checkbox'] {
 
 input[type='checkbox']:before {
   content: '';
+  margin-top: 0.2rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -36,6 +37,7 @@ input:checked[type='checkbox']:before {
 
 input:checked[type='checkbox']:after {
   content: '';
+  margin-top: 0.2rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -48,6 +50,7 @@ input:checked[type='checkbox']:after {
 }
 input:hover[type='checkbox']:after {
   content: '';
+  margin-top: 0.2rem;
   cursor: pointer;
   position: absolute;
   top: 0;
