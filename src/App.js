@@ -11,7 +11,7 @@ class App extends Component {
     firstName: '',
     lastName: '',
     disabled: false,
-    showError: false,
+    errors: {},
   };
   onCheckboxChanged = () => {
     this.setState({
@@ -20,66 +20,88 @@ class App extends Component {
     this.lastName.value = '';
   };
 
-  onGreetClicked = () => {
+  validateInput = () => {
     const { disabled } = this.state;
-    if (this.firstName.value === '') {
-      this.setState({
-        showError: true,
-      });
-    } else {
-      this.setState({
-        firstName: this.firstName.value,
-        lastName: disabled
-          ? this.appConfig.DISABLED_LAST_NAME_MSG
-          : this.lastName.value,
-      });
-      this.firstName.value = '';
-      this.lastName.value = '';
+    const errors = {};
+    if (this.firstName.value.trim() === '') {
+      errors.firstName = this.appConfig.FIRST_NAME_FIELD['ERROR_MSG'];
     }
+    if (this.lastName.value.trim() === '' && !disabled) {
+      errors.lastName = this.appConfig.LAST_NAME_FIELD['ERROR_MSG'];
+    }
+
+    return Object.keys(errors).length === 0 ? '' : errors;
   };
-  onFNameChange = () => {
+
+  onGreetSubmit = (e) => {
+    const { disabled } = this.state;
+    e.preventDefault();
+    const errors = this.validateInput();
+
+    this.setState({ errors });
+    if (errors) return;
+
     this.setState({
-      showError: false,
+      firstName: this.firstName.value,
+      lastName: disabled
+        ? this.appConfig.DISABLED_LAST_NAME_MSG
+        : this.lastName.value,
+    });
+    this.firstName.value = '';
+    this.lastName.value = '';
+  };
+
+  onChange = (e) => {
+    const { errors } = this.state;
+    delete errors[e.target.name];
+    this.setState({
+      errors,
     });
   };
+
   render() {
-    const { firstName, lastName, disabled, showError } = this.state;
+    const { firstName, lastName, disabled, errors } = this.state;
     return (
       <div>
         <Header lastName={lastName} firstName={firstName} />
-        <div className='input-div'>
-          <InputBox
-            ref={(input) => {
-              this.firstName = input;
-            }}
-            type={this.appConfig.FIRST_NAME_FIELD['TYPE']}
-            placeholder={this.appConfig.FIRST_NAME_FIELD['PLACEHOLDER']}
-            onChange={this.onFNameChange}
-            showError={showError}
-            errorMessage={this.appConfig.FIRST_NAME_FIELD['ERROR_MSG']}
-            name={this.appConfig.FIRST_NAME_FIELD['NAME']}
-          />
+        <form onSubmit={this.onGreetSubmit}>
+          <div className='input-div'>
+            <InputBox
+              ref={(input) => {
+                this.firstName = input;
+              }}
+              type={this.appConfig.FIRST_NAME_FIELD['TYPE']}
+              placeholder={this.appConfig.FIRST_NAME_FIELD['PLACEHOLDER']}
+              onChange={this.onChange}
+              isLabel={false}
+              error={errors.firstName}
+              name={this.appConfig.FIRST_NAME_FIELD['NAME']}
+              autoFocus={true}
+            />
 
-          <CheckBox
-            name={this.appConfig.GREET_CHECKBOX_FIELD['NAME']}
-            checked={disabled}
-            onChange={this.onCheckboxChanged}
-          />
-          <InputBox
-            ref={(input) => {
-              this.lastName = input;
-            }}
-            type={this.appConfig.LAST_NAME_FIELD['TYPE']}
-            disabled={disabled}
-            isLabel={false}
-            placeholder={this.appConfig.LAST_NAME_FIELD['PLACEHOLDER']}
-            name={this.appConfig.LAST_NAME_FIELD['NAME']}
-          />
-        </div>
+            <CheckBox
+              name={this.appConfig.GREET_CHECKBOX_FIELD['NAME']}
+              checked={disabled}
+              onChange={this.onCheckboxChanged}
+            />
+            <InputBox
+              ref={(input) => {
+                this.lastName = input;
+              }}
+              type={this.appConfig.LAST_NAME_FIELD['TYPE']}
+              disabled={disabled}
+              isLabel={false}
+              error={!disabled ? errors.lastName : ''}
+              onChange={this.onChange}
+              placeholder={this.appConfig.LAST_NAME_FIELD['PLACEHOLDER']}
+              name={this.appConfig.LAST_NAME_FIELD['NAME']}
+            />
+          </div>
 
-        <button className='btn' onClick={this.onGreetClicked}>
-          {this.appConfig.GREET_BUTTON_NAME}
-        </button>
+          <button className='btn' type='submit'>
+            {this.appConfig.GREET_BUTTON_NAME}
+          </button>
+        </form>
       </div>
     );
   }

@@ -10,6 +10,7 @@ class appConfiguration {
     NAME: 'lastName',
     PLACEHOLDER: 'L NAME',
     TYPE: 'text',
+    ERROR_MSG: 'Please enter last name.',
   };
 
   DISABLED_LAST_NAME_MSG = 'LNU';

@@ -12,8 +12,10 @@ const InputBox = (
     customClass,
     placeholder,
     showError,
+    error,
     disabled,
     errorMessage,
+    autoFocus,
   },
   ref
 ) => {
@@ -26,11 +28,12 @@ const InputBox = (
         type={type}
         onChange={onChange}
         name={name}
-        className={showError ? 'inpt-box err' : 'inpt-box'}
+        className={error ? 'inpt-box err' : 'inpt-box'}
         placeholder={placeholder}
         disabled={disabled}
+        autoFocus={autoFocus}
       />
-      {showError ? <p className='err-style'>{errorMessage}</p> : ''}
+      {error && <p className='err-style'>{error}</p>}
     </div>
   );
 };
@@ -47,6 +50,7 @@ InputBox.propTypes = {
   showError: PropTypes.bool,
   disabled: PropTypes.bool,
   errorMessage: PropTypes.string,
+  autoFocus: PropTypes.bool,
 };
 InputBox.defaultProps = {
   isLabel: true,
@@ -56,6 +60,7 @@ InputBox.defaultProps = {
   showError: false,
   disabled: false,
   errorMessage: '',
+  autoFocus: false,
 };
 
 export default forwardRInputWithRef;
