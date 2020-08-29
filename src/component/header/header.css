@@ -1,0 +1,10 @@
+.header-div {
+  background: white;
+  padding: 1rem;
+}
+
+.header-div > p {
+  color: #006fcf;
+  font-weight: 400;
+  font-size: 2rem;
+}
