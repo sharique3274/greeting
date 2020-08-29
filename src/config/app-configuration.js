@@ -19,7 +19,7 @@ class appConfiguration {
     NAME: 'No LNAME',
   };
 
-  GREET_BUTTON_NAME = 'GREET MEE';
+  GREET_BUTTON_NAME = 'GREET ME';
 }
 
 export default appConfiguration;

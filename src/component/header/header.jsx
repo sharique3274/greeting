@@ -3,7 +3,7 @@ import './header.css';
 
 const Header = ({ firstName, lastName }) => {
   return (
-    <div className='header-div'>
+    <div data-test='header-comp' className='header-div'>
       <p>Welcome {`${firstName} ${lastName}`}</p>
     </div>
   );

@@ -13,6 +13,7 @@ class App extends Component {
     disabled: false,
     errors: {},
   };
+
   onCheckboxChanged = () => {
     this.setState({
       disabled: !this.state.disabled,
@@ -64,7 +65,11 @@ class App extends Component {
     const { firstName, lastName, disabled, errors } = this.state;
     return (
       <div data-test='component-app'>
-        <Header lastName={lastName} firstName={firstName} />
+        <Header
+          data-test='app-header'
+          lastName={lastName}
+          firstName={firstName}
+        />
         <form onSubmit={this.onGreetSubmit}>
           <div className='input-div'>
             <InputBox
@@ -79,7 +84,6 @@ class App extends Component {
               name={this.appConfig.FIRST_NAME_FIELD['NAME']}
               autoFocus={true}
             />
-
             <CheckBox
               name={this.appConfig.GREET_CHECKBOX_FIELD['NAME']}
               checked={disabled}
@@ -98,7 +102,6 @@ class App extends Component {
               name={this.appConfig.LAST_NAME_FIELD['NAME']}
             />
           </div>
-
           <button data-test='greet-btn' className='btn' type='submit'>
             {this.appConfig.GREET_BUTTON_NAME}
           </button>
