@@ -9,12 +9,9 @@ const InputBox = (
     type,
     isLabel,
     label,
-    customClass,
     placeholder,
-    showError,
     error,
     disabled,
-    errorMessage,
     autoFocus,
   },
   ref
@@ -45,22 +42,18 @@ InputBox.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  customClass: PropTypes.string,
   placeholder: PropTypes.string,
-  showError: PropTypes.bool,
   disabled: PropTypes.bool,
-  errorMessage: PropTypes.string,
   autoFocus: PropTypes.bool,
+  error: PropTypes.string,
 };
 InputBox.defaultProps = {
   isLabel: true,
   onChange: () => {},
-  customClass: '',
   placeholder: '',
-  showError: false,
   disabled: false,
-  errorMessage: '',
   autoFocus: false,
+  error: '',
 };
 
 export default forwardRInputWithRef;
