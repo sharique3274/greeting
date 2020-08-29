@@ -46,6 +46,7 @@ class App extends Component {
       lastName: disabled
         ? this.appConfig.DISABLED_LAST_NAME_MSG
         : this.lastName.value,
+      disabled: false,
     });
     this.firstName.value = '';
     this.lastName.value = '';
