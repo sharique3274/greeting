@@ -3,8 +3,10 @@ import './App.css';
 import Header from './component/header/header';
 import CheckBox from './component/check-box/check-box';
 import InputBox from './component/input-box/input-box';
+import appConfiguration from './config/app-configuration';
 
 class App extends Component {
+  appConfig = new appConfiguration();
   state = {
     firstName: '',
     lastName: '',
@@ -27,7 +29,9 @@ class App extends Component {
     } else {
       this.setState({
         firstName: this.firstName.value,
-        lastName: disabled ? 'LNU' : this.lastName.value,
+        lastName: disabled
+          ? this.appConfig.DISABLED_LAST_NAME_MSG
+          : this.lastName.value,
       });
       this.firstName.value = '';
       this.lastName.value = '';
@@ -48,16 +52,16 @@ class App extends Component {
             ref={(input) => {
               this.firstName = input;
             }}
-            type='text'
-            customClass={showError ? 'inpt-box err' : 'inpt-box'}
-            placeholder='F NAME'
+            type={this.appConfig.FIRST_NAME_FIELD['TYPE']}
+            placeholder={this.appConfig.FIRST_NAME_FIELD['PLACEHOLDER']}
             onChange={this.onFNameChange}
             showError={showError}
-            errorMessage='Please enter first name.'
+            errorMessage={this.appConfig.FIRST_NAME_FIELD['ERROR_MSG']}
+            name={this.appConfig.FIRST_NAME_FIELD['NAME']}
           />
 
           <CheckBox
-            name='No LNAME'
+            name={this.appConfig.GREET_CHECKBOX_FIELD['NAME']}
             checked={disabled}
             onChange={this.onCheckboxChanged}
           />
@@ -65,17 +69,16 @@ class App extends Component {
             ref={(input) => {
               this.lastName = input;
             }}
-            type='text'
+            type={this.appConfig.LAST_NAME_FIELD['TYPE']}
             disabled={disabled}
-            customClass='inpt-box'
             isLabel={false}
-            placeholder='L NAME'
-            name='lastName'
+            placeholder={this.appConfig.LAST_NAME_FIELD['PLACEHOLDER']}
+            name={this.appConfig.LAST_NAME_FIELD['NAME']}
           />
         </div>
 
         <button className='btn' onClick={this.onGreetClicked}>
-          GREET ME
+          {this.appConfig.GREET_BUTTON_NAME}
         </button>
       </div>
     );

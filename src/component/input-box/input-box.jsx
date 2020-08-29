@@ -26,7 +26,7 @@ const InputBox = (
         type={type}
         onChange={onChange}
         name={name}
-        className={customClass}
+        className={showError ? 'inpt-box err' : 'inpt-box'}
         placeholder={placeholder}
         disabled={disabled}
       />
