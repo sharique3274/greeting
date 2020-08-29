@@ -34,8 +34,7 @@ class App extends Component {
     return Object.keys(errors).length === 0 ? '' : errors;
   };
 
-  onGreetSubmit = (e) => {
-    console.log(e);
+  onGreetSubmit = () => {
     const { disabled } = this.state;
 
     const errors = this.validateInput();
