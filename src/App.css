@@ -35,7 +35,13 @@
 .err {
   border: 1px solid red;
 }
+.err:focus {
+  border: 1px solid red;
+}
 
+.err:active {
+  border: 1px solid red;
+}
 .btn {
   padding: 0.8rem;
   position: absolute;

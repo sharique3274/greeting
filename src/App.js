@@ -58,7 +58,7 @@ class App extends Component {
             ''
           )}
           <CheckBox
-            name='No LName'
+            name='No LNAME'
             checked={disabled}
             onChange={this.onCheckboxChanged}
           />
