@@ -63,7 +63,7 @@ class App extends Component {
   render() {
     const { firstName, lastName, disabled, errors } = this.state;
     return (
-      <div>
+      <div data-test='component-app'>
         <Header lastName={lastName} firstName={firstName} />
         <form onSubmit={this.onGreetSubmit}>
           <div className='input-div'>
@@ -99,7 +99,7 @@ class App extends Component {
             />
           </div>
 
-          <button className='btn' type='submit'>
+          <button data-test='greet-btn' className='btn' type='submit'>
             {this.appConfig.GREET_BUTTON_NAME}
           </button>
         </form>
