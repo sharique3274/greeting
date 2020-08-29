@@ -32,3 +32,6 @@
 .err:active {
   border: 1px solid red;
 }
+.err-style {
+  color: red;
+}

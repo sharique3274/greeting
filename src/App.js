@@ -53,6 +53,7 @@ class App extends Component {
             placeholder='F NAME'
             onChange={this.onFNameChange}
             showError={showError}
+            // errorMessage='Please enter first name.'
           />
 
           <CheckBox

@@ -13,6 +13,7 @@ const InputBox = (
     placeholder,
     showError,
     disabled,
+    errorMessage,
   },
   ref
 ) => {
@@ -29,7 +30,7 @@ const InputBox = (
         placeholder={placeholder}
         disabled={disabled}
       />
-      {showError ? <p className='err-style'>Please enter first name</p> : ''}
+      {showError ? <p className='err-style'>{errorMessage}</p> : ''}
     </div>
   );
 };
@@ -45,6 +46,7 @@ InputBox.propTypes = {
   placeholder: PropTypes.string,
   showError: PropTypes.bool,
   disabled: PropTypes.bool,
+  errorMessage: PropTypes.string,
 };
 InputBox.defaultProps = {
   isLabel: true,
@@ -53,6 +55,7 @@ InputBox.defaultProps = {
   placeholder: '',
   showError: false,
   disabled: false,
+  errorMessage: '',
 };
 
 export default forwardRInputWithRef;
