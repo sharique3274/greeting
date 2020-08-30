@@ -251,3 +251,217 @@ test('onGreetSubmit disabled false firstName empty lastName empty', () => {
     lastName: '',
   });
 });
+
+test('onChange on firstName', () => {
+  const state = {
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+    disabled: false,
+    errors: {
+      firstName: 'Please enter first name',
+      lastName: 'Please enter last name.',
+    },
+  };
+  const e = {
+    target: { name: 'firstName' },
+  };
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onChange(e);
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: {
+      lastName: 'Please enter last name.',
+    },
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});
+
+test('onChange on lastName', () => {
+  const state = {
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+    disabled: false,
+    errors: {
+      firstName: 'Please enter first name.',
+      lastName: 'Please enter last name.',
+    },
+  };
+  const e = {
+    target: { name: 'lastName' },
+  };
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onChange(e);
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: {
+      firstName: 'Please enter first name.',
+    },
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});
+
+test('onChange on lastName when errors.firstName is empty', () => {
+  const state = {
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+    disabled: false,
+    errors: {
+      lastName: 'Please enter last name.',
+    },
+  };
+  const e = {
+    target: { name: 'lastName' },
+  };
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onChange(e);
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: {},
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});
+
+test('onChange on firstName when errors.lastName is empty', () => {
+  const state = {
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+    disabled: false,
+    errors: {
+      firstName: 'Please enter first name.',
+    },
+  };
+  const e = {
+    target: { name: 'firstName' },
+  };
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onChange(e);
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: {},
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});
+
+test('onCheckboxChanged disabled is true', () => {
+  const state = {
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+    disabled: true,
+    errors: {
+      lastName: 'Please enter last name.',
+    },
+  };
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onCheckboxChanged();
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: {
+      lastName: 'Please enter last name.',
+    },
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});
+
+test('onCheckboxChanged disabled is false', () => {
+  const state = {
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+    disabled: false,
+    errors: {
+      lastName: 'Please enter last name.',
+    },
+  };
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onCheckboxChanged();
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: true,
+    errors: {
+      lastName: 'Please enter last name.',
+    },
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});
+
+test('onCheckboxChanged disabled is true', () => {
+  const state = {
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+    disabled: true,
+    errors: {
+      lastName: 'Please enter last name.',
+    },
+  };
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onCheckboxChanged();
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: {
+      lastName: 'Please enter last name.',
+    },
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});
+
+test('onCheckboxChanged disabled is true', () => {
+  const state = {
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+    disabled: true,
+    errors: {},
+  };
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onCheckboxChanged();
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: {},
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});
+
+test('onCheckboxChanged disabled is false', () => {
+  const state = {
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+    disabled: false,
+    errors: {},
+  };
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onCheckboxChanged();
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: true,
+    errors: {},
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});

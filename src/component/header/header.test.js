@@ -23,8 +23,6 @@ test('header props test', () => {
   const prop = {
     firstName: 'Sharique',
     lastName: 'Rahman',
-    disabled: false,
-    errors: {},
   };
   const wrapper = setup(prop);
   const headerContent = findByTestAttr(wrapper, 'header-comp');
@@ -35,8 +33,6 @@ test('header props test lastname not present', () => {
   const prop = {
     firstName: 'Sharique',
     lastName: '',
-    disabled: false,
-    errors: {},
   };
   const wrapper = setup(prop);
   const headerContent = findByTestAttr(wrapper, 'header-comp');

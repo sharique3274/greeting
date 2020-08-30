@@ -14,11 +14,19 @@ class App extends Component {
     errors: {},
   };
 
-  onCheckboxChanged = () => {
+  onCheckboxChanged = (lastName) => {
+    const { disabled, errors } = this.state;
     this.setState({
       disabled: !this.state.disabled,
     });
-    this.lastName.value = '';
+
+    /* 
+     (if there is error before on Last Name field) show error even if user checked and uncheked checkbox.
+     Uncomment if error needs to be removed on checked
+    */
+    // if (disabled === false) delete errors['lastName'];
+
+    this.lastName ? (this.lastName.value = '') : (lastName = '');
   };
 
   validateInput = (firstName, lastName) => {
@@ -48,7 +56,7 @@ class App extends Component {
       disabled: false,
     });
     this.firstName ? (this.firstName.value = '') : (firstName = '');
-    this.lastName ? (this.lastName.value = '') : (firstName = '');
+    this.lastName ? (this.lastName.value = '') : (lastName = '');
   };
 
   onChange = (e) => {
@@ -85,7 +93,7 @@ class App extends Component {
           <CheckBox
             name={this.appConfig.GREET_CHECKBOX_FIELD['NAME']}
             checked={disabled}
-            onChange={this.onCheckboxChanged}
+            onChange={() => this.onCheckboxChanged(this.lastName.value)}
           />
           <InputBox
             ref={(input) => {
