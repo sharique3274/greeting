@@ -23,15 +23,25 @@
 }
 
 .err {
-  border: 1px solid red;
+  border: 1px solid #b12527;
 }
 .err:focus {
-  border: 1px solid red;
+  border: 1px solid #b12527;
 }
 
 .err:active {
-  border: 1px solid red;
+  border: 1px solid #b12527;
 }
 .err-style {
-  color: red;
+  color: #b12527;
+  margin-left: 0.5em;
+}
+
+.warn-img {
+  width: 1rem;
+  height: 1rem;
+}
+
+.err-div {
+  display: flex;
 }

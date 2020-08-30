@@ -31,7 +31,12 @@ const InputBox = (
         disabled={disabled}
         autoFocus={autoFocus}
       />
-      {error && <p className='err-style'>{error}</p>}
+      {error && (
+        <div className='err-div'>
+          <img className='warn-img' src='./images/warn.png' alt='warn' />
+          <p className='err-style'>{error}</p>
+        </div>
+      )}
     </div>
   );
 };
