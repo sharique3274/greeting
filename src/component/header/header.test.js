@@ -21,6 +21,7 @@ test('render without error', () => {
 
 test('header props test', () => {
   const prop = {
+    greetMsg: 'Welcome',
     firstName: 'Sharique',
     lastName: 'Rahman',
   };
@@ -31,6 +32,7 @@ test('header props test', () => {
 
 test('header props test lastname not present', () => {
   const prop = {
+    greetMsg: 'Welcome',
     firstName: 'Sharique',
     lastName: '',
   };

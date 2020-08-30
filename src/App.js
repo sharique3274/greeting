@@ -73,6 +73,7 @@ class App extends Component {
       <div data-test='component-app'>
         <Header
           data-test='app-header'
+          greetMsg={this.appConfig.GREET_MSG}
           lastName={lastName}
           firstName={firstName}
         />

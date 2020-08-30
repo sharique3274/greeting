@@ -20,6 +20,8 @@ class appConfiguration {
   };
 
   GREET_BUTTON_NAME = 'GREET ME';
+
+  GREET_MSG = 'Welcome';
 }
 
 export default appConfiguration;
