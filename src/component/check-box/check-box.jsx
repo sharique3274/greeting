@@ -7,6 +7,7 @@ const CheckBox = ({ name, onChange, checked }) => {
     <div>
       <label className='check-label' htmlFor={name}>
         <input
+          data-test='check-comp'
           id={name}
           type='checkbox'
           onChange={onChange}
@@ -22,11 +23,13 @@ const CheckBox = ({ name, onChange, checked }) => {
 CheckBox.propTypes = {
   checked: PropTypes.bool,
   label: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  onChange: PropTypes.func,
 };
 CheckBox.defaultProps = {
   checked: false,
+  name: '',
+  onChange: () => {},
 };
 
 export default CheckBox;

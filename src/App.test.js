@@ -37,3 +37,217 @@ test('app initial state', () => {
     lastName: '',
   });
 });
+
+test('validateInput firsName empty and disabled true', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: true,
+    errors: {},
+  };
+
+  const firstName = '';
+  const lastName = '';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  const result = componentInstance.validateInput(firstName, lastName);
+  expect(result).toEqual({ firstName: 'Please enter first name.' });
+});
+
+test('validateInput firsName empty and lastName empty disabled false', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: false,
+    errors: {},
+  };
+
+  const firstName = '';
+  const lastName = '';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  const result = componentInstance.validateInput(firstName, lastName);
+  expect(result).toEqual({
+    firstName: 'Please enter first name.',
+    lastName: 'Please enter last name.',
+  });
+});
+
+test('validateInput firsName empty and lastName empty disabled true', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: true,
+    errors: {},
+  };
+
+  const firstName = '';
+  const lastName = '';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  const result = componentInstance.validateInput(firstName, lastName);
+  expect(result).toEqual({
+    firstName: 'Please enter first name.',
+  });
+});
+
+test('validateInput firsName empty and lastName empty disabled false', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: false,
+    errors: {},
+  };
+
+  const firstName = 'Sharique';
+  const lastName = '';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  const result = componentInstance.validateInput(firstName, lastName);
+  expect(result).toEqual({
+    lastName: 'Please enter last name.',
+  });
+});
+
+test('validateInput firsName !empty and lastName !empty disabled false', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: false,
+    errors: {},
+  };
+
+  const firstName = 'Sharique';
+  const lastName = 'Rahman';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  const result = componentInstance.validateInput(firstName, lastName);
+  expect(result).toEqual('');
+});
+
+test('onGreetSubmit with both lastName and firstName', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: false,
+    errors: {},
+  };
+
+  const firstName = 'Sharique';
+  const lastName = 'Rahman';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onGreetSubmit(firstName, lastName);
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: '',
+    firstName: 'Sharique',
+    lastName: 'Rahman',
+  });
+});
+
+test('onGreetSubmit disabled true firstName !empty lastName empty', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: true,
+    errors: {},
+  };
+
+  const firstName = 'Sharique';
+  const lastName = '';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onGreetSubmit(firstName, lastName);
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: '',
+    firstName: 'Sharique',
+    lastName: 'LNU',
+  });
+});
+
+test('onGreetSubmit disabled true firstName empty lastName empty', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: true,
+    errors: {},
+  };
+
+  const firstName = '';
+  const lastName = '';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onGreetSubmit(firstName, lastName);
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: true,
+    errors: {
+      firstName: 'Please enter first name.',
+    },
+    firstName: '',
+    lastName: '',
+  });
+});
+
+test('onGreetSubmit disabled false firstName empty lastName empty', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: false,
+    errors: {},
+  };
+
+  const firstName = '';
+  const lastName = '';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onGreetSubmit(firstName, lastName);
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: {
+      firstName: 'Please enter first name.',
+      lastName: 'Please enter last name.',
+    },
+    firstName: '',
+    lastName: '',
+  });
+});
+
+test('onGreetSubmit disabled false firstName empty lastName empty', () => {
+  const state = {
+    firstName: '',
+    lastName: '',
+    disabled: false,
+    errors: {},
+  };
+
+  const firstName = '';
+  const lastName = 'Rahman';
+
+  const wrapper = setup(null, state);
+  const componentInstance = wrapper.instance();
+  componentInstance.onGreetSubmit(firstName, lastName);
+  const appState = wrapper.state();
+  expect(appState).toEqual({
+    disabled: false,
+    errors: {
+      firstName: 'Please enter first name.',
+    },
+    firstName: '',
+    lastName: '',
+  });
+});

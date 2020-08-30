@@ -20,6 +20,7 @@ const InputBox = (
     <div>
       {isLabel ? <label htmlFor={name}>{label}</label> : ''}
       <input
+        data-test='inpt-comp'
         id={name}
         ref={ref}
         type={type}

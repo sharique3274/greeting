@@ -21,36 +21,34 @@ class App extends Component {
     this.lastName.value = '';
   };
 
-  validateInput = () => {
+  validateInput = (firstName, lastName) => {
     const { disabled } = this.state;
     const errors = {};
-    if (this.firstName.value.trim() === '') {
+    if (firstName === '') {
       errors.firstName = this.appConfig.FIRST_NAME_FIELD['ERROR_MSG'];
     }
-    if (this.lastName.value.trim() === '' && !disabled) {
+    if (lastName === '' && !disabled) {
       errors.lastName = this.appConfig.LAST_NAME_FIELD['ERROR_MSG'];
     }
 
     return Object.keys(errors).length === 0 ? '' : errors;
   };
 
-  onGreetSubmit = () => {
+  onGreetSubmit = (firstName, lastName) => {
     const { disabled } = this.state;
 
-    const errors = this.validateInput();
+    const errors = this.validateInput(firstName, lastName);
 
     this.setState({ errors });
     if (errors) return;
 
     this.setState({
-      firstName: this.firstName.value,
-      lastName: disabled
-        ? this.appConfig.DISABLED_LAST_NAME_MSG
-        : this.lastName.value,
+      firstName: firstName,
+      lastName: disabled ? this.appConfig.DISABLED_LAST_NAME_MSG : lastName,
       disabled: false,
     });
-    this.firstName.value = '';
-    this.lastName.value = '';
+    this.firstName ? (this.firstName.value = '') : (firstName = '');
+    this.lastName ? (this.lastName.value = '') : (firstName = '');
   };
 
   onChange = (e) => {
@@ -105,7 +103,12 @@ class App extends Component {
         <button
           data-test='greet-btn'
           className='btn'
-          onClick={this.onGreetSubmit}
+          onClick={() =>
+            this.onGreetSubmit(
+              this.firstName.value.trim(),
+              this.lastName.value.trim()
+            )
+          }
         >
           {this.appConfig.GREET_BUTTON_NAME}
         </button>
