@@ -14,7 +14,7 @@ class App extends Component {
     errors: {},
   };
 
-  onCheckboxChanged = (lastName) => {
+  onCheckboxChanged = () => {
     const { disabled, errors } = this.state;
     this.setState({
       disabled: !this.state.disabled,
@@ -26,7 +26,7 @@ class App extends Component {
     */
     // if (disabled === false) delete errors['lastName'];
 
-    this.lastName ? (this.lastName.value = '') : (lastName = '');
+    if (this.lastName) this.lastName.value = '';
   };
 
   validateInput = (firstName, lastName) => {
@@ -55,8 +55,8 @@ class App extends Component {
       lastName: disabled ? this.appConfig.DISABLED_LAST_NAME_MSG : lastName,
       disabled: false,
     });
-    this.firstName ? (this.firstName.value = '') : (firstName = '');
-    this.lastName ? (this.lastName.value = '') : (lastName = '');
+    if (this.firstName) this.firstName.value = '';
+    if (this.lastName) this.lastName.value = '';
   };
 
   onChange = (e) => {
@@ -94,7 +94,7 @@ class App extends Component {
           <CheckBox
             name={this.appConfig.GREET_CHECKBOX_FIELD['NAME']}
             checked={disabled}
-            onChange={() => this.onCheckboxChanged(this.lastName.value)}
+            onChange={this.onCheckboxChanged}
           />
           <InputBox
             ref={(input) => {
